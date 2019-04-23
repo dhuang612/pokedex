@@ -16,7 +16,7 @@ const DetailViews = ({pokemon}) =>{
             <div className='data-wrapper'>
                  <h1 className='data-name'>ID: {id} {name}</h1>
                     <p className="data-char">Type: {type}</p>
-                        <div className="data-info">{displayedPoke}</div>
+                    <div className="data-info">{displayedPoke}</div>
             </div>
         </section>    
     )

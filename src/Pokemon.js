@@ -1,5 +1,6 @@
 import { prototype } from "stream";
 import React from 'react';
+
 //this is going out to the api and grabbing back info.
 
 
@@ -14,28 +15,33 @@ class Pokemon{
         //array of objects
         this.height = data.height;
         this.stats = data.stats
-        this.filterPokeStats = this.stats.filter()
+       // console.log(data.stats);
+       
         this.displayedPoke = this.stats.map(stat =>{
             //returning console.log(stat) shows the display
-               console.log(stat.base_stat);
-               return(
-                  <div>
-                      <p>Speed: {stat.base_stat}</p>
-                      <p>Special Defense: {stat.base_stat}</p>
-                      <p>Special Attack: {stat.base_stat}</p>
-                      <p>Defense: {stat.base_stat}</p>
-                      <p>Speed: {stat.base_stat}</p>
-                      <p>Attack: {stat.base_stat}</p>
-                      <p>HP: {stat.base_stat}</p>
-                  </div> 
-               );
+              if(this.stats.indexOf(stat.stat.name)=== -1){
+
+               
+                console.log(stat.base_stat, stat.stat.name);
+                return(
+                    <div>
+                    <p>{stat.stat.name} {stat.base_stat}</p>
+                    
+                </div> 
+                )
+               
+               
+            }  
+              
                console.log(data.stats)
         })
            
         
     }
+    render(){
+       
+    }
     
-
 
 } 
 
@@ -56,6 +62,13 @@ const stats = function(){
 }
 
 })
+
+
+ this.filteredPokemonInfo = this.stats.filter(stat.stat.name =>{
+            if(stats.indexOf(stat.stat.name)=== -1){
+                
+            }
+        })
 */
 
 
