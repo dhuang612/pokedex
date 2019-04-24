@@ -7,3 +7,4 @@ adding additional features:<br />
 Pokemon base stats<br />
 search<br />
 nest location<br />
+Pokemon Bio <br />
