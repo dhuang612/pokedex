@@ -1,9 +1,11 @@
 import { prototype } from "stream";
 import React from 'react';
+import { version } from "punycode";
 
-//this is going out to the api and grabbing back info.
-
-
+/*
+this is organizing our data received from the api.
+also known as a class property.
+*/
 class Pokemon{
     
     constructor(data){
@@ -16,9 +18,10 @@ class Pokemon{
         this.height = data.height;
         this.stats = data.stats;
         //this returns a link to a separate page with additional info.
-        this.encounters = data.location_area_encounters;
+        
+       //going to add in a second fetch for the encounter location.
        
-        console.log(this.encounters);
+        console.log(this.location_area_encounters);
         this.displayedPokeStats = this.stats.map(stat =>{
             //returning console.log(stat) shows the display
               if(this.stats.indexOf(stat.stat.name)=== -1){
@@ -28,43 +31,37 @@ class Pokemon{
                         <p>{stat.stat.name} {stat.base_stat}</p>
                     </div> 
                 )
-               
-               
             }  
-              
-               
         })
+        //currently have promise setup to return data. need to parse through info to get down to correct label
+        this.location_area_encounters = fetch(data.location_area_encounters)
+            .then(res => res.json())
+            .then(data =>{
+                    console.log(data);
+              
+                    
+            });
            
         
     }
-   
+  
 
 } 
 
 export default Pokemon;
 
 /*
-const stats = function(){
-  
-        
-            return(
-                <div>
-                    {stat.stats.base_stat}
-                </div>
-            )
-            
-    
-    })
-}
-
-})
+    if(([data.version_details]) === 'red'){
+                    console.log(data.version_details);
+                }
 
 
- this.filteredPokemonInfo = this.stats.filter(stat.stat.name =>{
-            if(stats.indexOf(stat.stat.name)=== -1){
-                
-            }
-        })
+     if(this.location_area_encounters = undefined){
+                    return Pokemon;
+                }
+                if(this.version_details[version:{'red'}] === 'red'){
+                    console.log(data);
+                }
 */
 
 
