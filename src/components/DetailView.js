@@ -2,14 +2,16 @@ import React from 'react';
 import './styles/DetailView.css';
 import Pokemon from '../Pokemon';
 import { Stats, stat } from 'fs';
+import {showPokemonLocation} from '../components/App';
 
 
 
 const DetailViews = ({pokemon}) =>{
     //defined the variable here.
-    const{id, name, sprite, type,showPokemonLocation} = pokemon;
+    const{id, name, sprite, type} = pokemon;
     //defined the function here
     const displayedPokeStats = pokemon.displayedPokeStats;
+    const showPokemonLocation = pokemon.showPokemonLocation;
     
    
    
@@ -23,7 +25,7 @@ const DetailViews = ({pokemon}) =>{
             <div className="data-info">{displayedPokeStats}
            
             </div>
-                <p>{showPokemonLocation}</p>
+                <p>{[showPokemonLocation]}</p>
          
     </div>
 </section>    

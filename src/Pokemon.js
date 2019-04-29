@@ -1,7 +1,7 @@
 import { prototype } from "stream";
 import React from 'react';
 import { version } from "punycode";
-
+import {showPokemonLocation} from '../src/components/App';
 /*
 this is organizing our data received from the api.
 also known as a class property.
@@ -9,15 +9,15 @@ also known as a class property.
 class Pokemon{
     
     constructor(data){
-        
+        console.log(data)
         this.id = data.id;
         this.name = data.name;
         this.sprite = data.sprites.front_default;
         this.type = data.types[0].type.name;
-        this.showPokemonLocation = data.showPokemonLocation;
+     
         this.stats = data.stats;
-        console.log(this.showPokemonLocation);
-            console.log(this.encounterlocations);
+       
+            
         this.displayedPokeStats = this.stats.map(stat =>{
             //returning console.log(stat) shows the display
               if(this.stats.indexOf(stat.stat.name)=== -1){
@@ -37,7 +37,7 @@ class Pokemon{
       
         
     }
-  
+   
 
 
 } 

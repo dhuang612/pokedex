@@ -13,13 +13,14 @@ class App extends Component{
         this.state = {
             pokemon: {
                 sprite: pokeball,
-                encounterlocations: null,
+                encounterlocations: '',
                
             }
         };
 
         this.handleOnClick = this.handleOnClick.bind(this);
         this.onClick = this.onClick.bind(this);
+        this.showPokemonLocation = this.showPokemonLocation.bind(this);
     }
     onClick(id){
         this.handleOnClick(id);
@@ -42,7 +43,8 @@ class App extends Component{
 
     showPokemonLocation(id){
         const locations = [];
-        const uniqueArr = [];
+        let uniqueArr = [];
+        this.handleOnClick(id);
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`)
         .then(res => res.json())
         .then(function(data){
@@ -51,36 +53,22 @@ class App extends Component{
                 if(data[i].version_details[x].version.name === 'red' ||data[i].version_details[x].version.name === 'blue'){
                    locations.push(data[i].location_area.name);
                     uniqueArr = [...new Set(locations)]
-                   console.log(uniqueArr);
+                  
+                   Pokemon.location_area_encounters = uniqueArr;
                    
+                   console.log(Pokemon.location_area_encounters);
                         }
-                       return(
-                           <div>{uniqueArr}</div>
-                       ) 
+                    
+                     
                    }
                 }
                 
             });
+            return  uniqueArr;
             
-        }   
-
-    
-
-/*
-
-     this.displayedPokeStats = this.stats.map(stat =>{
-            //returning console.log(stat) shows the display
-              if(this.stats.indexOf(stat.stat.name)=== -1){
-                    console.log(stat.base_stat, stat.stat.name);
-                return(
-                    <div>
-                        <p>{stat.stat.name} {stat.base_stat}</p>
-                    </div> 
-                )
-            }  
-
-*/
-
+            
+        } 
+     
 
 
     render(){
@@ -94,31 +82,5 @@ class App extends Component{
 }
 
 export default App;
-/*
- this.displayedPokeStats = this.stats.map(stat =>{
-     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`)
-            .then(res => res.json())
-            .then(data =>{
-                const pokemonLocationURL = console.log(data);
-              
-            })
-
-             console.log([{data}[0]]);
-           // console.log([{data}[version_details]]);
-            if(data.version_details !== undefined ){
-                for(let i = 0; i < [data[i].version_details.length]; i++){
-                    //array of objects is next.
-                    console.log(data[i].version_details);
-
-                    for(let x = 0; x < data[i].version_details[x]; x++){
-                       
-                        console.log(data[i].version_details[x]);
-                    }
-                }        
-
-*/
-
-
-
 
 
