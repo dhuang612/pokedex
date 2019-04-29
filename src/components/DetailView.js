@@ -4,11 +4,13 @@ import Pokemon from '../Pokemon';
 import { Stats, stat } from 'fs';
 
 
+
 const DetailViews = ({pokemon}) =>{
     //defined the variable here.
-    const{id, name, sprite, type,encounters} = pokemon;
+    const{id, name, sprite, type,showPokemonLocation} = pokemon;
     //defined the function here
     const displayedPokeStats = pokemon.displayedPokeStats;
+    
    
    
 
@@ -18,7 +20,10 @@ const DetailViews = ({pokemon}) =>{
     <div className='data-wrapper'>
          <h1 className='data-name'>ID: {id} {name}</h1>
             <p className="data-char">Type: {type}</p>
-            <div className="data-info">{displayedPokeStats}</div>
+            <div className="data-info">{displayedPokeStats}
+           
+            </div>
+                <p>{showPokemonLocation}</p>
          
     </div>
 </section>    
