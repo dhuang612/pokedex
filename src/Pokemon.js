@@ -1,20 +1,19 @@
 import { prototype } from "stream";
 import React from 'react';
-import { version } from "punycode";
-import {showPokemonLocation} from '../src/components/App';
 /*
 this is organizing our data received from the api.
 also known as a class property.
+
 */
 class Pokemon{
-    
+  //I believe that this is where the location information needs to be added.  
     constructor(data){
         console.log(data)
         this.id = data.id;
         this.name = data.name;
         this.sprite = data.sprites.front_default;
         this.type = data.types[0].type.name;
-     
+        
         this.stats = data.stats;
        
             
