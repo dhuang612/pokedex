@@ -5,6 +5,7 @@ import Pokemon from '../Pokemon';
 
 import pokeball from '../assets/pokeball.png';
 import './styles/App.css';
+import PokeCell from './PokeCell';
 //because it's a class we generate the render(){}
 class App extends Component{
     constructor(){
@@ -13,8 +14,7 @@ class App extends Component{
         this.state = {
             pokemon: {
                 sprite: pokeball,
-                encounterlocations: '',
-               
+                location_area_encounters: [],
             }
         };
 
@@ -22,25 +22,26 @@ class App extends Component{
         this.onClick = this.onClick.bind(this);
         this.showPokemonLocation = this.showPokemonLocation.bind(this);
     }
-    onClick(id){
-        this.handleOnClick(id);
-        this.showPokemonLocation(id);
+    async onClick(id){
+        const data = await this.handleOnClick(id);
+        const routelocations = await this.showPokemonLocation(id);
+        const pokemon = new Pokemon(data, routelocations)
+        this.setState({pokemon})
     }
 
 //helper method for api calls switching it to promise all?
     handleOnClick(id){
-       fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+       return fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
         .then(res => res.json())
         .then(data =>{
-            const pokemon = new Pokemon(data);
-       
-           
-                this.setState({pokemon});
+           return data;
+                
+          
               
         })
         .catch(err => console.log(err));
     }
-
+//this should be converted over to using map
     showPokemonLocation(id){
         const locations = [];
         let uniqueArr = [];
@@ -48,25 +49,24 @@ class App extends Component{
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`)
         .then(res => res.json())
         .then(function(data){
+            console.log(data);
           for(let i = 0; i < data.length; i++){
+
             for(let x = 0; x < data[i].version_details.length; x++){
                 if(data[i].version_details[x].version.name === 'red' ||data[i].version_details[x].version.name === 'blue'){
                    locations.push(data[i].location_area.name);
                     uniqueArr = [...new Set(locations)]
-                  
-                   Pokemon.location_area_encounters = uniqueArr;
-                   
-                   console.log(Pokemon.location_area_encounters);
+                   console.log(uniqueArr);
                         }
-                    
-                     
                    }
                 }
+                console.log(uniqueArr)
                 
             });
-            return  uniqueArr;
             
-            
+         
+            return uniqueArr;
+        
         } 
      
 
@@ -84,3 +84,8 @@ class App extends Component{
 export default App;
 
 
+/*
+ const pokemon = new Pokemon(data);
+                this.setState({pokemon});
+
+*/

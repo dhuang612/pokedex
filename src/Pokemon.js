@@ -1,5 +1,6 @@
 import { prototype } from "stream";
 import React from 'react';
+import {showPokemonLocation} from './components/App';
 /*
 this is organizing our data received from the api.
 also known as a class property.
@@ -13,10 +14,11 @@ class Pokemon{
         this.name = data.name;
         this.sprite = data.sprites.front_default;
         this.type = data.types[0].type.name;
+        this.routelocations = this.uniqueArr;
         
         this.stats = data.stats;
        
-            
+            console.log(this.location);
         this.displayedPokeStats = this.stats.map(stat =>{
             //returning console.log(stat) shows the display
               if(this.stats.indexOf(stat.stat.name)=== -1){
